@@ -1,5 +1,4 @@
 package base;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -17,6 +16,7 @@ import io.appium.java_client.remote.MobilePlatform;
 import utility.ExtentReportSS;
 import utility.TestDataReader;
 
+// Base class for all page classes and test classes, contains driver instantiation and common functionalities
 public class BaseClass extends ExtentReportSS
 {
 	public static AndroidDriver<AndroidElement> driver;
@@ -46,4 +46,3 @@ public class BaseClass extends ExtentReportSS
 		wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
 }
-

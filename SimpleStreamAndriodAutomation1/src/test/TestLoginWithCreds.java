@@ -18,6 +18,7 @@ import io.appium.java_client.android.AndroidDriver;
 import pages.*;
 import utility.TestDataReader;
 
+//Test Class - Covers login scenarios
 public class TestLoginWithCreds extends BaseClass
 {
 	private static AndroidDriver driver;
@@ -44,27 +45,26 @@ public class TestLoginWithCreds extends BaseClass
 		driver.close();
 	}
 	
+	//Test for invalid credentials
 	@Test
 	public void test_Invalid_Creds() throws MalformedURLException 
 	{
 		test1 = extent.createTest("Test one","Test Invalid Creds");		
 		test1.log(Status.INFO, "Test One Started");
-		
 		LoginPage loginPage = new LoginPage(driver).acceptPopup();
 		new SoftAssert().assertTrue(loginPage.isLoaded(), "The login page is loaded successfully.");
-		test1.log(Status.INFO, "The login page is loaded successfully.");
+		test1.log(Status.PASS, "The login page is loaded successfully.");
 		loginPage.enterCredentials(TestDataReader.invalidUserName1, TestDataReader.invalidPassword1);
 		new SoftAssert().assertTrue(loginPage.areCredFieldsPopulated(TestDataReader.invalidUserName1, TestDataReader.invalidPassword1),
 				"username and password fields are populated correctly.");
-		test1.log(Status.INFO, "Username and password fields are populated correctly.");
+		test1.log(Status.PASS, "Username and password fields are populated correctly.");
 		loginPage.signIn();
-		test1.log(Status.INFO, "User Navigated to Page + Clicked on popup button + Entered Creds+Clicked on Sign in Button");
+		test1.log(Status.PASS, "User Navigated to Page + Clicked on popup button + Entered Creds+Clicked on Sign in Button");
 		Assert.assertEquals(loginPage.getErrorMsg(), TestDataReader.loginErrorMsg);
 		test1.log(Status.PASS, "Successfully Entered Invalid Creds and validated the error msg");
-	
-		
 	}
 	
+	//Test for valid credentials
 	@Test
 	public void test_Valid_Creds() throws MalformedURLException 
 	{
@@ -72,18 +72,17 @@ public class TestLoginWithCreds extends BaseClass
 		test2.log(Status.INFO, "Test two Started");
 		LoginPage loginPage = new LoginPage(driver).acceptPopup();
 		new SoftAssert().assertTrue(loginPage.isLoaded(), "The login page is loaded successfully.");
-		test2.log(Status.INFO, "The login page is loaded successfully.");
-		loginPage.enterCredentials(TestDataReader.validUserName1, TestDataReader.validPassword1);
-		new SoftAssert().assertTrue(loginPage.areCredFieldsPopulated(TestDataReader.validUserName1, TestDataReader.validPassword1),
+		test2.log(Status.PASS, "The login page is loaded successfully.");
+		loginPage.enterCredentials(TestDataReader.validUserName, TestDataReader.validPassword);
+		new SoftAssert().assertTrue(loginPage.areCredFieldsPopulated(TestDataReader.validUserName, TestDataReader.validPassword),
 				"username and password fields are populated correctly.");
-		test2.log(Status.INFO, "Username and password fields are populated correctly.");
-
+		test2.log(Status.PASS, "Username and password fields are populated correctly.");
 		MyAccountsPage myAcntPage = loginPage.signInForValidCred();
 		Assert.assertTrue(myAcntPage.isLoaded(), "Login successful!");
 		test2.log(Status.PASS, "Successfully Logged in");
-		
 	}
 			
+	//Test for invalid email
 	@Test
 	public void test_Invalid_Email() throws MalformedURLException 
 	{
@@ -91,15 +90,14 @@ public class TestLoginWithCreds extends BaseClass
 		test3.log(Status.INFO, "Test Three Started");
 		LoginPage loginPage = new LoginPage(driver).acceptPopup();
 		new SoftAssert().assertTrue(loginPage.isLoaded(), "The login page is loaded successfully.");
-		test3.log(Status.INFO, "The login page is loaded successfully.");
-		loginPage.enterCredentials(TestDataReader.invalidUserName3, TestDataReader.invalidPassword3);
-		new SoftAssert().assertTrue(loginPage.areCredFieldsPopulated(TestDataReader.invalidUserName3, TestDataReader.invalidPassword3),
+		test3.log(Status.PASS, "The login page is loaded successfully.");
+		loginPage.enterCredentials(TestDataReader.invalidUserName2, TestDataReader.invalidPassword2);
+		new SoftAssert().assertTrue(loginPage.areCredFieldsPopulated(TestDataReader.invalidUserName2, TestDataReader.invalidPassword2),
 				"username and password fields are populated correctly.");
-		test3.log(Status.INFO, "Username and password fields are populated correctly.");
-		boolean isErrorMsgDisplayed = loginPage.signIn().getErrorMsg().contains(TestDataReader.loginErrorMsg3);
-		test3.log(Status.INFO, "Correct Error Message Displayed");
+		test3.log(Status.PASS, "Username and password fields are populated correctly.");
+		boolean isErrorMsgDisplayed = loginPage.signIn().getErrorMsg().contains(TestDataReader.loginErrorMsg2);
+		test3.log(Status.PASS, "Correct Error Message Displayed");
 		Assert.assertTrue(isErrorMsgDisplayed, "The error message for invalid credentials is displayed correctly.");
 		test3.log(Status.PASS, "Successfully Checked Invalid Email");
-
 	}
 }

@@ -10,9 +10,7 @@
           <include name="before"/>
           <include name="reportSetUp"/>
           <include name="beforeTest"/>
-          <include name="test_Valid_Creds"/>
           <include name="afterTest"/>
-          <include name="test_Invalid_Creds"/>
         </methods>
       </class> <!-- test.TestLoginWithCreds -->
     </classes>
